@@ -1,0 +1,60 @@
+.background{
+    -fx-background: #181818;
+}
+
+.button{
+    -fx-background-color: #303030;
+    -fx-background-radius: 30;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+
+.button:hover{
+    -fx-background-color: #505050;
+    -fx-background-radius: 30;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+
+.button:pressed{
+    -fx-background-color: #202020;
+    -fx-background-radius: 30;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+
+.field{
+    -fx-background-color: #303030;
+    -fx-background-radius: 20;
+    -fx-text-fill: #FFFFFF;
+}
+
+.field2{
+    -fx-background-color: #303030;
+    -fx-text-fill: #FFFFFF;
+}
+
+
+
+.text-area {
+    -fx-text-fill: #FFFFFF;
+}
+
+.text-area .content{
+    -fx-background-color: #303030;
+}
+
+.text-area .scroll-bar: horizontal .track,
+.text-area .scroll-bar: vertical .track{
+    -fx-background-color:transparent;
+    -fx-border-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-border-radius:2em;
+}
+
+.text-area .scroll-bar: horizontal .thumb, 
+.text-area .scroll-bar: vertical .thumb{
+    -fx-background-color:derive(black,90%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
+}
