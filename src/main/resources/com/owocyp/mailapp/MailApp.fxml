@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.owocyp.mailapp.Controller">
+   <children>
+      <VBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0">
+         <children>
+            <Label text="MailApp">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="1000.0" spacing="10.0">
+         <children>
+            <Label fx:id="errorText">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Label>
+            <TextField fx:id="to" prefHeight="25.0" prefWidth="500.0" promptText="To" styleClass="field" />
+            <TextField fx:id="subject" prefHeight="25.0" prefWidth="500.0" promptText="Subject" styleClass="field" />
+            <ComboBox fx:id="number" prefWidth="150.0" promptText="Spam Number" />
+            <TextArea fx:id="mailText" prefHeight="200.0" prefWidth="500.0" promptText="Your Mail" styleClass="field2" />
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <Button fx:id="okButton" mnemonicParsing="false" onAction="#initialize" prefWidth="55.0" text="Ok" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#initialize" prefWidth="55.0" text="Cancel" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

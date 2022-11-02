@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.owocyp.mailapp.ControllerLogin">
+   <children>
+      <VBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0">
+         <children>
+            <Label text="MailApp Login">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="1000.0" spacing="5.0">
+         <children>
+            <Label fx:id="errorText">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Label>
+            <TextField fx:id="usernameField" prefHeight="25.0" prefWidth="300.0" promptText="Username" styleClass="field" />
+            <PasswordField fx:id="passwordField" prefHeight="25.0" prefWidth="300.0" promptText="Password" styleClass="field" />
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <Button fx:id="okButton" mnemonicParsing="false" onAction="#initialize" prefWidth="55.0" text="Ok" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#initialize" prefWidth="55.0" text="Cancel" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
