@@ -2,18 +2,18 @@ package com.owocyp.mailapp;
 
 import com.zaxxer.hikari.HikariDataSource;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+import java.util.Properties;
 
 public class Database {
 
     private static HikariDataSource dataSource;
-    private static String url = "jdbc:mariadb://---:3307/mail_app";
-    private static String username = "---";
-    private static String password = "---";
     public static ResultSet resultSet;
-
     public static List<String> usernameList = new ArrayList<>();
     public static List<String> mailList = new ArrayList<>();
     public static List<String> passwordList = new ArrayList<>();
@@ -100,7 +100,7 @@ public class Database {
 
     }
 
-    public static void updateData2(String username, int messageSend) throws SQLException {
+    public static void updateDataSendingMessages(String username, int messageSend) throws SQLException {
         System.out.println("Updating data...");
         try (Connection connection = dataSource.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement("""
@@ -131,12 +131,28 @@ public class Database {
     }
 
     public static void initDatabaseConnectionPool() {
-        System.out.println("Connection to database...");
-        dataSource = new HikariDataSource();
-        dataSource.setJdbcUrl(url);
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
-        System.out.println("Connection established");
+        try{
+            FileReader reader = new FileReader("src\\main\\resources\\config.properties");
+            Properties properties = new Properties();
+            properties.load(reader);
+            String url = properties.getProperty("url");
+            String username = properties.getProperty("username");
+            String password = properties.getProperty("password");
+
+            Base64.Decoder decoder = Base64.getDecoder();
+            byte[] bytesUrl = decoder.decode(url);
+            byte[] bytesUsername = decoder.decode(username);
+            byte[] bytesPassword = decoder.decode(password);
+
+            System.out.println("Connection to database...");
+            dataSource = new HikariDataSource();
+            dataSource.setJdbcUrl(new String(bytesUrl));
+            dataSource.setUsername(new String(bytesUsername));
+            dataSource.setPassword(new String(bytesPassword));
+            System.out.println("Connection established");
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public static void closeDatabaseConnectionPool() {
