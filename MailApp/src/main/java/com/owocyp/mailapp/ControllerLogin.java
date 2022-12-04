@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class ControllerLogin {
     @FXML private Button okButton;
@@ -22,6 +23,7 @@ public class ControllerLogin {
     @FXML private PasswordField passwordField;
     @FXML private Label errorText;
     @FXML private VBox parent;
+
     @FXML
     public void initialize() {
         try {
@@ -45,16 +47,13 @@ public class ControllerLogin {
             Database.closeDatabaseConnectionPool();
         }
     }
-    
-    public ControllerLogin() {
-    }
 
     @FXML
     private void OkButton()  {
         if(!usernameField.getText().isEmpty() && !passwordField.getText().isEmpty()){
             try {
                 Database.initDatabaseConnectionPool();
-                Database.readData2();
+                Database.readData();
                 while (Database.resultSet.next()){
                     String usernameResult = Database.resultSet.getString(1);
                     String passwordResult = Database.resultSet.getString(2);
@@ -69,7 +68,7 @@ public class ControllerLogin {
                             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MailApp.fxml"));
                             Parent root = fxmlLoader.load();
                             Stage stage1 = new Stage();
-                            root.getStylesheets().add(Main.class.getResource("styles.css").toExternalForm());
+                            root.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("styles.css")).toExternalForm());
                             stage1.setTitle("MailApp");
                             stage1.setScene(new Scene(root));
                             stage1.setResizable(false);
@@ -79,15 +78,14 @@ public class ControllerLogin {
                         }
                         break;
                     }else{
-                        errorText.setText("Wrong username or password");
+                        errorText.setText("Wrong username or password.");
                     }
                 }
-
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }else{
-            errorText.setText("One or both fields ain't fill");
+            errorText.setText("One or both fields ain't fill.");
         }
     }
 

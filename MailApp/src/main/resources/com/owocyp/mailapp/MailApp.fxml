@@ -24,7 +24,6 @@
                </VBox.margin></Label>
             <TextField fx:id="to" prefHeight="25.0" prefWidth="500.0" promptText="To" styleClass="field" />
             <TextField fx:id="subject" prefHeight="25.0" prefWidth="500.0" promptText="Subject" styleClass="field" />
-            <ComboBox fx:id="number" prefWidth="150.0" promptText="Spam Number" />
             <TextArea fx:id="mailText" prefHeight="200.0" prefWidth="500.0" promptText="Your Mail" styleClass="field2" />
          </children>
       </VBox>
