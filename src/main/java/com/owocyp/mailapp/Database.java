@@ -5,18 +5,13 @@ import com.zaxxer.hikari.HikariDataSource;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Base64;
-import java.util.List;
 import java.util.Properties;
 
 public class Database {
 
     private static HikariDataSource dataSource;
     public static ResultSet resultSet;
-    public static List<String> usernameList = new ArrayList<>();
-    public static List<String> mailList = new ArrayList<>();
-    public static List<String> passwordList = new ArrayList<>();
 
     public static void main(String[] args) throws SQLException {
         try {
@@ -45,33 +40,6 @@ public class Database {
 
     public static void readData() throws SQLException {
         System.out.println("Reading data...");
-        try (Connection connection = dataSource.getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement("""
-                        SELECT `username`, `password`, `mail`
-                        FROM `account`
-                        ORDER BY `ID` DESC
-                    """)) {
-                ResultSet resultSet = statement.executeQuery();
-                boolean empty = true;
-                while (resultSet.next()) {
-                    String usernameResult = resultSet.getString(1);
-                    String passwordResult = resultSet.getString(2);
-                    String mailResult = resultSet.getString(3);
-                    usernameList.add(usernameResult);
-                    passwordList.add(passwordResult);
-                    mailList.add(mailResult);
-                    empty = false;
-                }
-                System.out.println(usernameList + " | " + passwordList + " | " + mailList);
-                if (empty) {
-                    System.out.println("\t (no data)");
-                }
-            }
-        }
-    }
-
-    public static void readData2() throws SQLException{
-        System.out.println("Reading data...");
         try (Connection connection = dataSource.getConnection()){
             try(PreparedStatement statement = connection.prepareStatement("""
                         SELECT `username`, `password`, `mail`
@@ -83,24 +51,7 @@ public class Database {
         }
     }
 
-    public static void updateData(String username, String newPassword, String mail) throws SQLException {
-        System.out.println("Updating data...");
-        try (Connection connection = dataSource.getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement("""
-                        UPDATE `account`
-                        SET `password` = ?
-                        WHERE `username` = ?
-                    """)) {
-                statement.setString(1, newPassword);
-                statement.setString(2, username);
-                int rowsUpdated = statement.executeUpdate();
-                System.out.println("Rows updated: " + rowsUpdated);
-            }
-        }
-
-    }
-
-    public static void updateDataSendingMessages(String username, int messageSend) throws SQLException {
+    public static void updateData(String username, int messageSend) throws SQLException {
         System.out.println("Updating data...");
         try (Connection connection = dataSource.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement("""
@@ -113,7 +64,6 @@ public class Database {
                 statement.executeUpdate();
             }
         }
-
     }
 
     public static void deleteData(String nameExpression) throws SQLException {
